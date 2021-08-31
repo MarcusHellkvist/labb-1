@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text, Button } from "react-native";
+import { StyleSheet, View, Text, Button, Image } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import SearchBar from "../components/SearchBar";
 import WeatherList from "../components/WeatherList";
+import CurrentWeather from "../components/CurrentWeather";
 import Config from "../config.json";
 
 export default function Home({ navigation }) {
@@ -11,8 +12,11 @@ export default function Home({ navigation }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [location, setLocation] = useState(null);
   const [weather, setWeather] = useState(null);
+  const [code, setCode] = useState(0);
 
   const getWeatherData = () => {
+    setWeather(null);
+    setLocation(null);
     fetch(
       "http://api.openweathermap.org/data/2.5/weather?q=" +
         searchQuery +
@@ -24,6 +28,7 @@ export default function Home({ navigation }) {
       .then((data) => {
         console.log("FETCH NUMBER 1");
         console.log(data);
+        setCode(data.cod);
         setLocation(data);
         return fetch(
           "https://api.openweathermap.org/data/2.5/onecall?lat=" +
@@ -63,6 +68,7 @@ export default function Home({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <Text>{code}</Text>
       <View style={styles.header}>
         <SearchBar
           clickHandler={clickHandler}
@@ -70,16 +76,14 @@ export default function Home({ navigation }) {
         ></SearchBar>
       </View>
       <View style={styles.body}>
-        {weather === null ? (
-          <Text>Du måste söka på något</Text>
-        ) : (
-          <Text>Kolla vad jag hittade:</Text>
-        )}
-        {weather && (
-          <WeatherList
-            weather={weather}
-            navigateToDetails={navigateToDetails}
-          />
+        {weather && location && (
+          <View>
+            <CurrentWeather current={weather.current} location={location} />
+            <WeatherList
+              weather={weather}
+              navigateToDetails={navigateToDetails}
+            />
+          </View>
         )}
       </View>
     </View>
@@ -92,5 +96,5 @@ const styles = StyleSheet.create({
     flexDirection: "column",
   },
   header: { flex: 1 },
-  body: { flex: 6 },
+  body: { flex: 12, backgroundColor: "#ffffff" },
 });

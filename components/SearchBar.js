@@ -12,7 +12,7 @@ export default function SearchBar({ updateSearchBar, clickHandler }) {
         />
       </View>
       <View>
-        <Button onPress={clickHandler} title="Search" />
+        <Button onPress={clickHandler} color="#4062bb" title="Search" />
       </View>
     </View>
   );
@@ -20,7 +20,7 @@ export default function SearchBar({ updateSearchBar, clickHandler }) {
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: "lightblue",
+    backgroundColor: "#fff",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderColor: "#777",
+    borderColor: "#ebebeb",
     padding: 8,
     margin: 10,
     width: 200,
