@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import MyContext from "../MyContext";
 import { StyleSheet, View, Text } from "react-native";
 
 export default function details({ route }) {
@@ -11,6 +12,7 @@ export default function details({ route }) {
       <Text>{route.params.pressure}</Text>
       <Text>{route.params.weather[0].main}</Text>
       <Text>{route.params.pop}</Text>
+      <Text>{useContext(MyContext)}</Text>
     </View>
   );
 }
