@@ -12,7 +12,12 @@ export default function SearchBar({ updateSearchBar, clickHandler }) {
         />
       </View>
       <View>
-        <Button onPress={clickHandler} color="#4062bb" title="Search" />
+        <Button
+          testID="searchButton"
+          onPress={clickHandler}
+          color="#4062bb"
+          title="Search"
+        />
       </View>
     </View>
   );
