@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text, Button, Image } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Button,
+  Image,
+  SectionList,
+} from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import SearchBar from "../components/SearchBar";
@@ -18,6 +25,7 @@ export default function Home({ navigation }) {
   const getWeatherData = () => {
     setWeather(null);
     setLocation(null);
+    setCode(0);
     fetch(
       "http://api.openweathermap.org/data/2.5/weather?q=" +
         searchQuery +
@@ -29,6 +37,7 @@ export default function Home({ navigation }) {
       .then((data) => {
         console.log("FETCH NUMBER 1");
         console.log(data);
+        setCode(data.cod);
         setLocation(data);
         return fetch(
           "https://api.openweathermap.org/data/2.5/onecall?lat=" +
@@ -84,6 +93,7 @@ export default function Home({ navigation }) {
             />
           </View>
         )}
+        {code === "404" && <Text>City not found</Text>}
       </View>
     </View>
   );
