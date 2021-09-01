@@ -1,22 +1,23 @@
 import React, { useContext } from "react";
-import MyContext from "../MyContext";
 import { StyleSheet, View, Text } from "react-native";
+import DetailsCard from "../components/DetailsCard";
+import About from "../components/About";
 
 export default function details({ route }) {
   return (
     <View style={styles.body}>
-      <Text>Weather Details</Text>
-      <Text>{route.params.dt}</Text>
-      <Text>{route.params.sunrise}</Text>
-      <Text>{Math.round(route.params.temp.day)}</Text>
-      <Text>{route.params.pressure}</Text>
-      <Text>{route.params.weather[0].main}</Text>
-      <Text>{route.params.pop}</Text>
-      <Text>{useContext(MyContext)}</Text>
+      <View style={styles.detailsCard}>
+        <DetailsCard item={route.params} />
+      </View>
+      <View style={styles.about}>
+        <About />
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  body: { backgroundColor: "#ffffff" },
+  body: { backgroundColor: "#ffffff", flex: 1, flexDirection: "column" },
+  detailsCard: { flex: 12 },
+  about: { flex: 1, justifyContent: "center", alignSelf: "center" },
 });
