@@ -6,6 +6,7 @@ import SearchBar from "../components/SearchBar";
 import WeatherList from "../components/WeatherList";
 import CurrentWeather from "../components/CurrentWeather";
 import Config from "../config.json";
+import About from "../components/About";
 
 export default function Home({ navigation }) {
   const APIKEY = Config.API_TOKEN;
@@ -28,7 +29,6 @@ export default function Home({ navigation }) {
       .then((data) => {
         console.log("FETCH NUMBER 1");
         console.log(data);
-        setCode(data.cod);
         setLocation(data);
         return fetch(
           "https://api.openweathermap.org/data/2.5/onecall?lat=" +
@@ -68,7 +68,6 @@ export default function Home({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text>{code}</Text>
       <View style={styles.header}>
         <SearchBar
           clickHandler={clickHandler}

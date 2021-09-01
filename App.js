@@ -16,7 +16,7 @@ export default function App() {
           <Stack.Screen
             name="Home"
             component={Home}
-            options={{ title: "Home Screen" }}
+            options={{ title: "Best Weather App 2021" }}
           />
           <Stack.Screen
             name="Details"
